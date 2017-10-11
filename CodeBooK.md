@@ -1,4 +1,4 @@
-﻿##Description of data cleaning and manipulation steps
+﻿# Description of data cleaning and manipulation steps
 
 In order to fulfil the requirements of the project assignment, this codebook will elaborate on the data handling which essentially was done using the code contained in the file run_analysis.r. This file (run_analysis.r) has functions that do the following:
 1.	Load the required packages/libraries
@@ -17,7 +17,7 @@ if(!file.exists("./assignmentData/project_Dataset.zip")){
   download.file(Url,destfile="./assignmentData/assignment_Dataset.zip",mode = "wb")
 }
 
-## Unzip the data into UCI HAR Dataset
+
 if(!file.exists("./assignmentData/UCI HAR Dataset")){
   unzip(zipfile="./assignmentData/assignment_Dataset.zip",exdir="./assignmentData")
 }
