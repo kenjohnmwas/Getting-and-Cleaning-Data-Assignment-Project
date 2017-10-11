@@ -4,6 +4,7 @@ In order to fulfil the requirements of the project assignment, this codebook wil
 1.	Load the required packages/libraries
 
 library(plyr);
+
 library(knitr)
 
 2.	Downloads the data from:  https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
@@ -13,6 +14,8 @@ if(!file.exists("./assignmentData")){
   dir.create("./assignmentData")
 }
 Url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+
+
 3.	Unzips the data into the working directory or working space which is assignmentData
 
 if(!file.exists("./assignmentData/project_Dataset.zip")){
@@ -28,39 +31,57 @@ if(!file.exists("./assignmentData/UCI HAR Dataset")){
 5.	Use the following code blocks to read the data into the working space:
 
 featuresTest <- read.table("C:/Users/John/Desktop/Learning Resources/Coursera/Data science/Data Cleaning/assignment/assignmentData/UCI HAR Dataset/test/X_test.txt", header = FALSE)
-featuresTrain <- read.table("C:/Users/John/Desktop/Learning Resources/Coursera/Data science/Data Cleaning/assignment/assignmentData/UCI HAR Dataset/train/X_train.txt", header = FALSE) 
+
+featuresTrain <- read.table("C:/Users/John/Desktop/Learning Resources/Coursera/Data science/Data Cleaning/assignment/assignmentData/UCI HAR Dataset/train/X_train.txt", header = FALSE)
+
 
 activityTest  <- read.table("C:/Users/John/Desktop/Learning Resources/Coursera/Data science/Data Cleaning/assignment/assignmentData/UCI HAR Dataset/test/Y_test.txt" , header = FALSE)
-activityTrain <- read.table("C:/Users/John/Desktop/Learning Resources/Coursera/Data science/Data Cleaning/assignment/assignmentData/UCI HAR Dataset/train/Y_train.txt", header = FALSE) 
+
+activityTrain <- read.table("C:/Users/John/Desktop/Learning Resources/Coursera/Data science/Data Cleaning/assignment/assignmentData/UCI HAR Dataset/train/Y_train.txt", header = FALSE)
 
 subjectTest  <- read.table("C:/Users/John/Desktop/Learning Resources/Coursera/Data science/Data Cleaning/assignment/assignmentData/UCI HAR Dataset/test/subject_test.txt", header = FALSE)
+
 subjectTrain <- read.table("C:/Users/John/Desktop/Learning Resources/Coursera/Data science/Data Cleaning/assignment/assignmentData/UCI HAR Dataset/train/subject_train.txt", header = FALSE)
 
 
 6.	For subject, activity and features data combine the respective train and test data into one dataset respectively:
 activityData <- rbind(activityTrain, activityTest)
+
 subjectData <- rbind(subjectTrain, subjectTest)
+
 featuresData <- rbind(featuresTrain, featuresTest)
+
 
 7.	set variable names for the datasets (activityData, subjectData, featuresData) 
 
 names(subjectData)<-c("subject")
+
 names(activityData)<- c("activity")
+
 featuresNames <- read.table(file.path("C:/Users/John/Desktop/Learning Resources/Coursera/Data science/Data Cleaning/assignment/assignmentData/UCI HAR Dataset", "features.txt"),head=FALSE)
+
 names(featuresData)<- featuresNames$V2
+
 
 Note: the variable names for subjectData and activityData  (subject and activity) are given by the data user while the variable names for the featuresData were obtained from the features.txt file.
 
 8.	The next step was to merge the datasets (activityData, subjectData, featuresData) column wise using "cbind"  to create  data frame called “InitialData”as follows :
 
+
 dataCombine <- cbind(subjectData, activityData)
+
 InitialData <- cbind(featuresData, dataCombine)
+
+
 
 9.	Then the  “InitialData” data frame was subset by extracting Names of Features with "mean()" or "std()" using the grep 
 
 subsetNames <-featuresNames$V2[grep("mean\\(\\)|std\\(\\)", featuresNames$V2)]
+
 meandevNames <-c(as.character(subsetNames), "subject", "activity" )
+
 InitialData <-subset(InitialData, select = meandevNames)
+
 
 10.	Use descriptive activity names to name the activities in the data set by reading descriptive activity names from "activity_labels.txt and use them as factors for the “activity” variable in “InitialData” frame as follows: 
 
