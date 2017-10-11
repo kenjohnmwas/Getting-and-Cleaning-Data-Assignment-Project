@@ -2,11 +2,13 @@
 
 In order to fulfil the requirements of the project assignment, this codebook will elaborate on the data handling which essentially was done using the code contained in the file run_analysis.r. This file (run_analysis.r) has functions that do the following:
 1.	Load the required packages/libraries
+
 library(plyr);
 library(knitr)
 
 2.	Downloads the data from:  https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
-The code that does this is as follows 
+The code that does this is as follows
+ 
 if(!file.exists("./assignmentData")){
   dir.create("./assignmentData")
 }
