@@ -63,6 +63,7 @@ InitialData <-subset(InitialData, select = meandevNames)
 10.	Use descriptive activity names to name the activities in the data set by reading descriptive activity names from "activity_labels.txt and use them as factors for the “activity” variable in “InitialData” frame as follows: 
 
 activityLabels <- read.table(file.path("C:/Users/John/Desktop/Learning Resources/Coursera/Data science/Data Cleaning/assignment/assignmentData/UCI HAR Dataset", "activity_labels.txt"),header = FALSE)
+
 InitialData$activity<-factor(InitialData$activity, labels=activityLabels[,2])
 
 11.	The next step is to give descriptive names to the variables in the “InitialData”.
@@ -88,7 +89,8 @@ A  check of the data at this moment using “names(InitialData)” shows that th
 [65] "fBodyBodyGyroJerkMag-mean()" "fBodyBodyGyroJerkMag-std()"  "subject"                     "activity"
 
 Use the following code to assign descriptive names:
-ames(InitialData)<-gsub("^t", "time", names(InitialData))
+
+names(InitialData)<-gsub("^t", "time", names(InitialData))
 names(InitialData)<-gsub("^f", "frequency", names(InitialData))
 names(InitialData)<-gsub("Acc", "Accelerometer", names(InitialData))
 names(InitialData)<-gsub("Gyro", "Gyroscope", names(InitialData))
